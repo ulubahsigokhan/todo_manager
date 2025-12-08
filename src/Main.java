@@ -2,12 +2,10 @@ import model.Task;
 
 public class Main {
     public static void main(String[] args) {
-        Task task = new Task("Learn Java");
-        System.out.println(task);
+        Task t1 = new Task("Learn Java", Task.Priority.HIGH);
+        System.out.println(t1.getStatusMessage());
 
-        task.setCompleted(true);
-
-        System.out.println("Is task done? " + task.isCompleted());
-        System.out.println(task);
+        t1.setCompleted(true);
+        System.out.println(t1.getStatusMessage());
     }
 }
