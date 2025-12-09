@@ -43,4 +43,34 @@ public class TaskManager {
     public List<Task> getTasks() {
         return tasks;
     }
+
+    public boolean markTaskCompleted(int id) {
+        for (Task t : tasks) {
+            if (t.getId() == id) {
+                t.setCompleted(true);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public List<Task> getCompletedTasks() {
+        List<Task> completed = new ArrayList<>();
+        for (Task t : tasks) {
+            if (t.isCompleted()){
+                completed.add(t);
+            }
+        }
+        return completed;
+    }
+
+    public List<Task> getActiveTasks() {
+        List<Task> active = new ArrayList<>();
+        for (Task t : tasks) {
+            if(!t.isCompleted()){
+                active.add(t);
+            }
+        }
+        return active;
+    }
 }

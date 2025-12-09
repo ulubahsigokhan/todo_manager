@@ -9,26 +9,22 @@ public class Main {
 
         TaskManager manager = new TaskManager();
 
-        Task t1 = new Task("Learn Java", Task.Priority.HIGH);
-        Task t2 = new Task("Go to Gym", Task.Priority.MEDIUM);
+        manager.addTask(new Task("Buy Groceries", Task.Priority.HIGH));
+        manager.addTask(new Task("Go to Gym", Task.Priority.MEDIUM));
+        manager.addTask(new Task("Call Mom", Task.Priority.LOW));
 
-        manager.addTask(t1);
-        manager.addTask(t2);
+        manager.markTaskCompleted(2); // mark gym as completed
 
-        System.out.println("Tasks added successfully!");
-
-        manager.listTasks();
-
-        boolean removed = manager.removeTask(1);
-        System.out.println("Removed Task 1? " + removed);
-
-        manager.listTasks();
-
-        System.out.println("\nSearch results for 'Gym':");
-        List<Task> found = manager.searchTasks("Gym");
-        for (Task t : found) {
+        System.out.println("Completed:");
+        for (Task t : manager.getCompletedTasks()) {
             System.out.println(t);
         }
+
+        System.out.println("Active:");
+        for (Task t : manager.getActiveTasks()) {
+            System.out.println(t);
+        }
+
 
     }
 }
