@@ -1,24 +1,34 @@
 import model.Task;
+import model.TaskManager;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
 
-        Task task = new Task("Learn Java", Task.Priority.HIGH);
-        Task t1 = new Task("Practice Git", Task.Priority.MEDIUM);
-        Task t2 = new Task("Test automation study", Task.Priority.LOW);
+        TaskManager manager = new TaskManager();
 
-        // NOW create the list
-        ArrayList<Task> tasks = new ArrayList<>();
+        Task t1 = new Task("Learn Java", Task.Priority.HIGH);
+        Task t2 = new Task("Go to Gym", Task.Priority.MEDIUM);
 
-        tasks.add(task);
-        tasks.add(t1);
-        tasks.add(t2);
+        manager.addTask(t1);
+        manager.addTask(t2);
 
-        System.out.println("Total tasks stored: " + tasks.size());
+        System.out.println("Tasks added successfully!");
 
-        for (Task t : tasks) {
-            System.out.println("ID: " + t.getId() + " | Title: " + t.getStatusMessage());
+        manager.listTasks();
+
+        boolean removed = manager.removeTask(1);
+        System.out.println("Removed Task 1? " + removed);
+
+        manager.listTasks();
+
+        System.out.println("\nSearch results for 'Gym':");
+        List<Task> found = manager.searchTasks("Gym");
+        for (Task t : found) {
+            System.out.println(t);
         }
+
     }
 }

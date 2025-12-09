@@ -15,6 +15,10 @@ public class Task {
         this.id = idCounter++;// default when new task created
     }
 
+    public String getTitle() {
+        return title;
+    }
+
     public void complete(boolean status) {
         this.completed = status;
     }
@@ -62,4 +66,6 @@ public class Task {
             return "✖ Task '" + title + "' is not completed.";
         }
     }
+
+
 }
