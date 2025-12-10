@@ -1,30 +1,28 @@
 import model.Task;
 import model.TaskManager;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
 
         TaskManager manager = new TaskManager();
 
-        manager.addTask(new Task("Buy Groceries", Task.Priority.HIGH));
-        manager.addTask(new Task("Go to Gym", Task.Priority.MEDIUM));
-        manager.addTask(new Task("Call Mom", Task.Priority.LOW));
+        // Add tasks
+        manager.addTask(new Task("Buy Groceries", Task.Priority.HIGH, LocalDate.of(2025, 12, 20)));
+        manager.addTask(new Task("Go to Gym", Task.Priority.MEDIUM, LocalDate.of(2025, 12, 22)));
 
-        manager.markTaskCompleted(2); // mark gym as completed
+        // === BEFORE UPDATE ===
+        System.out.println("=== BEFORE UPDATE ===");
+        manager.printAllTasks();
 
-        System.out.println("Completed:");
-        for (Task t : manager.getCompletedTasks()) {
-            System.out.println(t);
-        }
+        // Update the tasks
+        manager.updateTitle(1, "Buy Milk");
+        manager.updatePriority(2, Task.Priority.HIGH);
+        manager.markTaskCompleted(1);  // Only works if you added this earlier
 
-        System.out.println("Active:");
-        for (Task t : manager.getActiveTasks()) {
-            System.out.println(t);
-        }
-
-
+        // === AFTER UPDATE ===
+        System.out.println("\n=== AFTER UPDATE ===");
+        manager.printAllTasks();
     }
 }

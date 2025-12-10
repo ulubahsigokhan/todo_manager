@@ -1,5 +1,7 @@
 package model;
 
+import java.time.LocalDate;
+
 public class Task {
 
     private String title;
@@ -7,16 +9,22 @@ public class Task {
     private Priority priority;
     private static int idCounter = 1;
     private int id;
+    private LocalDate dueDate;
 
-    public Task(String title, Priority priority) {
+    public Task(String title, Priority priority, LocalDate dueDate) {
         this.title = title;
         this.priority = priority;
         this.completed = false;
-        this.id = idCounter++;// default when new task created
+        this.id = idCounter++;
+        this.dueDate = dueDate;
     }
 
     public String getTitle() {
         return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public void complete(boolean status) {
@@ -66,6 +74,5 @@ public class Task {
             return "✖ Task '" + title + "' is not completed.";
         }
     }
-
 
 }
