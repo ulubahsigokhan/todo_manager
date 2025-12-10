@@ -1,7 +1,11 @@
 package model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
+
 
 public class TaskManager {
 
@@ -135,12 +139,76 @@ public class TaskManager {
             if (t != null) {
                 System.out.println(
                         "Task ID: " + t.getId() +
-                        " | Task: " + t.getTitle() +
-                        " | Priority: " + t.getPriority() +
+                                " | Task: " + t.getTitle() +
+                                " | Priority: " + t.getPriority() +
                                 " | Completed: " + t.isCompleted());
             }
         }
     }
+
+    public List<Task> sortByDueDate() {
+        return tasks.stream().filter(t -> t.getDueDate() != null)
+                .sorted(Comparator.comparing(Task::getDueDate))
+                .toList();
+    }
+
+    public List<Task> filterByPriority(Task.Priority priority) {
+        List<Task> results = new ArrayList<>();
+        for (Task t : tasks) {
+            if (t.getPriority() == priority) {
+                results.add(t);
+            }
+        }
+        return results;
+    }
+
+
+    public List<Task> filterByCompletion(boolean completed) {
+        List<Task> results = new ArrayList<>();
+
+        for (Task t : tasks) {
+            if (t.isCompleted() == completed) {
+                results.add(t);
+            }
+        }
+
+        return results;
+    }
+
+    public void printTasks(List<Task> list) {
+        if (list == null || list.isEmpty()) {
+            System.out.println("No tasks found.");
+            return;
+        }
+        for (Task t : list) {
+            System.out.println(t);
+        }
+    }
+
+    public boolean editTask(int id, String newTitle, Task.Priority newPriority, LocalDate newDueDate) {
+        for (Task task : tasks) {
+            if (task.getId() == id) {
+                task.setTitle(newTitle);
+                task.setPriority(newPriority);
+                task.setDueDate(newDueDate);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean deleteTask(int id) {
+        Iterator<Task> iterator = tasks.iterator();
+        while (iterator.hasNext()) {
+            Task task = iterator.next();
+            if (task.getId() == id) {
+                iterator.remove();
+                return true;
+            }
+        }
+        return false;
+    }
 }
+
 
 

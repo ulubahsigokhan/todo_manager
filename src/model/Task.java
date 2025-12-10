@@ -44,7 +44,8 @@ public class Task {
         return "Task ID: " + id +
                 " | Task: " + title +
                 " | Priority: " + priority +
-                " | Completed: " + completed;
+                " | Completed: " + completed +
+                " | Due Date: " + dueDate;
     }
 
     public void toggleCompleted() {
@@ -73,6 +74,14 @@ public class Task {
         } else {
             return "✖ Task '" + title + "' is not completed.";
         }
+    }
+
+    public LocalDate getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(LocalDate dueDate) {
+        this.dueDate = dueDate;
     }
 
 }
